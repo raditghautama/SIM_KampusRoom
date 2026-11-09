@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('password');
             $table->enum('role', ['admin', 'peminjam'])->default('peminjam');
+            $table->enum('user_type', ['mahasiswa', 'dosen', 'tendik', 'admin'])->default('mahasiswa');
             $table->string('department')->nullable(); // Program Studi / Bagian
             $table->rememberToken();
             $table->timestamps();

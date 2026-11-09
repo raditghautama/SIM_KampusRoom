@@ -18,6 +18,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'user_type',
         'department',
     ];
 
@@ -45,7 +46,43 @@ class User extends Authenticatable
 
     public function isMahasiswa(): bool
     {
-        return $this->role === 'peminjam';
+        return $this->user_type === 'mahasiswa' || ($this->role === 'peminjam' && $this->user_type !== 'dosen');
+    }
+
+    public function isDosen(): bool
+    {
+        return $this->user_type === 'dosen';
+    }
+
+    public function getUserTypeLabelAttribute(): string
+    {
+        return match($this->user_type) {
+            'dosen' => 'Dosen',
+            'mahasiswa' => 'Mahasiswa',
+            'tendik' => 'Tenaga Kependidikan',
+            'admin' => 'Admin Sarpras',
+            default => ucfirst($this->role ?? 'Peminjam'),
+        };
+    }
+
+    public function getUserTypeBadgeAttribute(): string
+    {
+        return match($this->user_type) {
+            'admin' => 'bg-danger-subtle text-danger-emphasis border border-danger-subtle',
+            'dosen' => 'bg-info-subtle text-info-emphasis border border-info-subtle',
+            'tendik' => 'bg-warning-subtle text-warning-emphasis border border-warning-subtle',
+            default => 'bg-primary-subtle text-primary-emphasis border border-primary-subtle',
+        };
+    }
+
+    public function getIdentifierAttribute(): ?string
+    {
+        return $this->identity_number;
+    }
+
+    public function getPhoneAttribute(): ?string
+    {
+        return $this->no_hp;
     }
 
     /**

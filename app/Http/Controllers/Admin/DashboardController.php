@@ -20,6 +20,7 @@ class DashboardController extends Controller
             'pending_reservations' => Reservation::where('status', 'pending')->count(),
             'approved_reservations' => Reservation::where('status', 'approved')->count(),
             'today_reservations' => Reservation::whereDate('reservation_date', $today)->count(),
+            'total_users' => \App\Models\User::count(),
         ];
 
         // 5 Peminjaman terbaru

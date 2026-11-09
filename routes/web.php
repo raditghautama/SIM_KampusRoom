@@ -6,12 +6,14 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\RoomController as AdminRoomController;
 use App\Http\Controllers\Admin\ReservationController as AdminReservationController;
 use App\Http\Controllers\Admin\ReportController as AdminReportController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\User\RoomCatalogController;
 use App\Http\Controllers\User\ReservationController as UserReservationController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes - CampusRoom
+| Web Routes - SIM CampusRoom
 |--------------------------------------------------------------------------
 */
 
@@ -25,7 +27,7 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-// Authentication Routes (Manual Auth dengan identity_number & password)
+// Authentication Routes (Login NIM/NIDN & Password, Register)
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
@@ -35,7 +37,14 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
-// Role Peminjam Routes (/peminjam/room-catalog, /peminjam/dashboard, dll)
+// Profile & Account Settings (Untuk Semua User: Admin maupun Peminjam)
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
+});
+
+// Role Peminjam Routes (/peminjam/...)
 Route::middleware(['auth', 'role:peminjam'])->prefix('peminjam')->name('peminjam.')->group(function () {
     Route::get('/room-catalog', [RoomCatalogController::class, 'index'])->name('room-catalog');
     Route::get('/dashboard', function () {
@@ -58,19 +67,23 @@ Route::middleware(['auth', 'role:peminjam'])->name('user.')->group(function () {
     Route::post('/user/riwayat/{reservation}/batal', [UserReservationController::class, 'cancel'])->name('reservations.cancel');
 });
 
-// Role Admin (Pengelola Sarpras) Routes
+// Role Admin (Pengelola Sarpras Kampus) Routes
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     
     // CRUD Manajemen Ruangan
     Route::resource('rooms', AdminRoomController::class);
+
+    // CRUD Manajemen Pengguna (Users Management)
+    Route::resource('users', AdminUserController::class);
     
-    // Manajemen & Persetujuan Peminjaman
+    // Manajemen & Persetujuan Peminjaman (Approval & Reject)
     Route::get('/reservations', [AdminReservationController::class, 'index'])->name('reservations.index');
     Route::post('/reservations/{reservation}/approve', [AdminReservationController::class, 'approve'])->name('reservations.approve');
     Route::post('/reservations/{reservation}/reject', [AdminReservationController::class, 'reject'])->name('reservations.reject');
     
-    // Laporan & Cetak
+    // Laporan & Export PDF / Cetak
     Route::get('/reports', [AdminReportController::class, 'index'])->name('reports.index');
     Route::get('/reports/print', [AdminReportController::class, 'print'])->name('reports.print');
+    Route::get('/reports/pdf', [AdminReportController::class, 'exportPdf'])->name('reports.pdf');
 });

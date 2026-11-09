@@ -107,6 +107,7 @@ class AuthController extends Controller
             'email' => $validated['email'] ?? ($validated['identity_number'] . '@campusroom.ac.id'),
             'department' => $validated['department'],
             'role' => 'peminjam',
+            'user_type' => 'mahasiswa',
             'password' => Hash::make($validated['password']),
         ]);
 

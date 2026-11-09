@@ -1,85 +1,76 @@
 @extends('layouts.auth')
 
-@section('title', 'Masuk ke Akun - SIMPEL Universitas Nurul Jadid')
+@section('title', 'Masuk ke Akun - SIKAM')
 
 @section('content')
 <div class="split-card row g-0">
-    <!-- SISI KIRI (Dark Navy Blue Background) -->
+    <!-- SISI KIRI (Dark Navy Blue SaaS Branding) -->
     <div class="col-lg-5 split-card-left">
         <div>
             <!-- Badge Atas -->
             <div class="mb-4">
                 <span class="portal-badge">
-                    <i class="fa-solid fa-mobile-screen-button me-1"></i>
+                    <i class="fa-solid fa-building-columns me-1"></i>
                     PORTAL AKADEMIK
                 </span>
             </div>
 
             <!-- Logo Kampus & Judul -->
             <div class="d-flex align-items-center gap-3 mb-2">
-                <div class="campus-logo-box">
-                    <!-- Pastikan menyesuaikan path logo Universitas Nurul Jadid -->
-                    <img src="{{ asset('assets/img/logounuja.png') }}" alt="Logo Universitas Nurul Jadid" class="img-fluid" style="max-height: 48px;">
+                <div class="campus-logo-box bg-white bg-opacity-10 p-2 rounded-3 border border-white border-opacity-10">
+                    <i class="fa-solid fa-door-open fa-2x text-info"></i>
                 </div>
             </div>
 
             <h1 class="brand-title fw-bold text-white mt-3 mb-1" style="font-size: 1.8rem; letter-spacing: 0.5px;">SIKAM</h1>
 
             <!-- Subtitle -->
-            <div class="brand-subtitle text-uppercase fw-semibold mb-3" style="font-size: 0.75rem; letter-spacing: 0.5px; opacity: 0.9;">
-                SISTEM INFORMASI KAMPUS ROOM
+            <div class="brand-subtitle text-uppercase fw-semibold mb-3 text-info" style="font-size: 0.75rem; letter-spacing: 0.5px; opacity: 0.9;">
+                SISTEM INFORMASI KAMPUSROOM
             </div>
 
             <!-- Deskripsi Singkat -->
-            <p class="brand-desc mb-4" style="font-size: 0.85rem; opacity: 0.75; line-height: 1.5;">
-                Platform integrasi evaluasi perkuliahan dan pemantauan kinerja perkuliahan Universitas Nurul Jadid.
+            <p class="brand-desc mb-4 text-white-50" style="font-size: 0.85rem; line-height: 1.5;">
+                Platform cerdas pengelolaan dan peminjaman fasilitas kampus: Auditorium, Ruang Seminar Smart Class, Lab AI, Ruang Rapat, dan Amphitheater secara terintegrasi dan real-time.
             </p>
         </div>
 
         <!-- Checklist Fitur Bawah -->
-        <div class="feature-checklist mt-auto">
-            <div class="d-flex align-items-center mb-3">
-                <div class="check-icon-circle me-3">
-                    <i class="fa-solid fa-check"></i>
+        <div class="feature-checklist mt-auto pt-3">
+            <div class="d-flex align-items-center mb-2">
+                <div class="check-icon-circle me-3 bg-primary bg-opacity-25 text-info rounded-circle d-flex align-items-center justify-content-center" style="width: 24px; height: 24px;">
+                    <i class="fa-solid fa-bolt" style="font-size: 0.75rem;"></i>
                 </div>
-                <span class="text-light fw-medium" style="font-size: 0.85rem; opacity: 0.9;">Terintegrasi dengan SIMPT Kampus</span>
+                <span class="text-light fw-medium small">Status Ruangan Kosong/Terisi Real-Time</span>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+                <div class="check-icon-circle me-3 bg-primary bg-opacity-25 text-info rounded-circle d-flex align-items-center justify-content-center" style="width: 24px; height: 24px;">
+                    <i class="fab fa-whatsapp" style="font-size: 0.85rem;"></i>
+                </div>
+                <span class="text-light fw-medium small">Approval Otomatis & Notifikasi WhatsApp</span>
             </div>
             <div class="d-flex align-items-center">
-                <div class="check-icon-circle me-3">
-                    <i class="fa-solid fa-shield-halved"></i>
+                <div class="check-icon-circle me-3 bg-primary bg-opacity-25 text-info rounded-circle d-flex align-items-center justify-content-center" style="width: 24px; height: 24px;">
+                    <i class="fa-solid fa-shield-halved" style="font-size: 0.75rem;"></i>
                 </div>
-                <span class="text-light fw-medium" style="font-size: 0.85rem; opacity: 0.9;">Akses Keamanan Data Terenkripsi</span>
+                <span class="text-light fw-medium small">Multi-Role Mahasiswa, Dosen & Admin</span>
             </div>
         </div>
     </div>
 
-    <!-- SISI KANAN (White Background) -->
-    <div class="col-lg-7 split-card-right d-flex flex-column justify-content-between p-4 p-md-5">
+    <!-- SISI KANAN (White SaaS Login Form) -->
+    <div class="col-lg-7 split-card-right d-flex flex-column justify-content-between p-4 p-md-5 bg-white">
         <div>
             <!-- Header Kanan -->
             <div class="mb-4">
                 <h2 class="h3 fw-bold text-dark mb-1" style="letter-spacing: -0.01em;">Masuk ke Akun</h2>
-                <p class="text-muted small mb-0">Silakan lengkapi kredensial identitas Anda di bawah ini.</p>
+                <p class="text-muted small mb-0">Silakan masukkan NIM / NIDN dan kata sandi Anda.</p>
             </div>
 
             <!-- Flash & Error Messages -->
             @if(session('success'))
                 <div class="alert alert-success alert-dismissible fade show rounded-3 small py-2 px-3 mb-3 border-0 shadow-sm" role="alert">
                     <i class="fa-solid fa-circle-check me-1"></i> {{ session('success') }}
-                    <button type="button" class="btn-close py-2" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-
-            @if(session('info'))
-                <div class="alert alert-info alert-dismissible fade show rounded-3 small py-2 px-3 mb-3 border-0 shadow-sm" role="alert">
-                    <i class="fa-solid fa-circle-info me-1"></i> {{ session('info') }}
-                    <button type="button" class="btn-close py-2" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-
-            @if(session('warning'))
-                <div class="alert alert-warning alert-dismissible fade show rounded-3 small py-2 px-3 mb-3 border-0 shadow-sm" role="alert">
-                    <i class="fa-solid fa-triangle-exclamation me-1"></i> {{ session('warning') }}
                     <button type="button" class="btn-close py-2" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
@@ -105,55 +96,67 @@
             <form action="{{ route('login.post') }}" method="POST">
                 @csrf
 
-                <!-- Form Input 1: USERNAME (nidn / nim / nip) -->
+                <!-- Form Input 1: USERNAME (NIDN / NIM / Username) -->
                 <div class="mb-3">
-                    <label for="identity_number" class="form-label-custom text-uppercase fw-bold text-secondary" style="font-size: 0.75rem;">
-                        USERNAME <span class="text-muted fw-normal fs-7">(nidn / nim / nip)</span>
+                    <label for="identity_number" class="form-label text-uppercase fw-bold text-secondary mb-1" style="font-size: 0.75rem;">
+                        NOMOR IDENTITAS <span class="text-muted fw-normal">(NIM / NIDN / Username)</span>
                     </label>
-                    <div class="input-group-custom d-flex align-items-center rounded-3 bg-light px-3 py-1 border">
-                        <span class="text-muted me-2"><i class="fa-solid fa-id-card"></i></span>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border @error('identity_number') border-danger @enderror"><i class="fa-solid fa-id-card text-muted"></i></span>
                         <input type="text" 
                                name="identity_number" 
                                id="identity_number" 
-                               class="form-control bg-transparent border-0 shadow-none @error('identity_number') is-invalid @enderror" 
+                               class="form-control bg-light border @error('identity_number') is-invalid @enderror" 
                                value="{{ old('identity_number') }}" 
-                               placeholder="Masukkan NIDN / NIM atau Username" 
+                               placeholder="Contoh: 2421400096 atau admin01" 
                                required 
                                autofocus>
                     </div>
                 </div>
 
                 <!-- Form Input 2: PASSWORD -->
-                <div class="mb-4">
-                    <label for="password" class="form-label-custom text-uppercase fw-bold text-secondary" style="font-size: 0.75rem;">
+                <div class="mb-3">
+                    <label for="password" class="form-label text-uppercase fw-bold text-secondary mb-1" style="font-size: 0.75rem;">
                         PASSWORD
                     </label>
-                    <div class="input-group-custom d-flex align-items-center rounded-3 bg-light px-3 py-1 border">
-                        <span class="text-muted me-2"><i class="fa-solid fa-key"></i></span>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border @error('password') border-danger @enderror"><i class="fa-solid fa-key text-muted"></i></span>
                         <input type="password" 
                                name="password" 
                                id="password" 
-                               class="form-control bg-transparent border-0 shadow-none @error('password') is-invalid @enderror" 
+                               class="form-control bg-light border @error('password') is-invalid @enderror" 
                                placeholder="••••••••" 
                                required>
-                        <button class="btn border-0 p-0 text-muted shadow-none" type="button" id="togglePasswordBtn" title="Lihat / Sembunyikan Password">
+                        <button class="btn btn-outline-secondary border" type="button" id="togglePasswordBtn" title="Lihat / Sembunyikan Password">
                             <i class="fa-regular fa-eye" id="togglePasswordIcon"></i>
                         </button>
                     </div>
                 </div>
 
+                <!-- Remember Me & Lupa Password -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="remember" id="rememberMe">
+                        <label class="form-check-label small text-secondary" for="rememberMe">
+                            Ingat saya di perangkat ini
+                        </label>
+                    </div>
+                </div>
+
                 <!-- Tombol Submit -->
-                <button type="submit" class="btn btn-primary w-100 py-2-5 shadow-sm d-flex align-items-center justify-content-center gap-2 mb-4 rounded-3" style="background: linear-gradient(135deg, #2563eb, #3b82f6); border: none;">
+                <button type="submit" class="btn btn-primary w-100 py-2 rounded-3 shadow-sm d-flex align-items-center justify-content-center gap-2 mb-3" style="background: linear-gradient(135deg, #1d4ed8, #2563eb); border: none;">
                     <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                    <span class="fw-semibold">Masuk Sistem Sekarang</span>
+                    <span class="fw-semibold">Masuk ke Sistem</span>
                 </button>
             </form>
+
+            
         </div>
 
         <!-- Footer Copyright Bawah -->
-        <div class="footer-copyright text-center text-muted small mt-4">
-            <div class="fw-bold mb-1" style="font-size: 0.75rem;">&copy; {{ date('Y') }} UNIVERSITAS NURUL JADID</div>
-            <div style="font-size: 0.7rem; opacity: 0.75;">SIKAM - Sistem Informasi Kampus Room</div>
+        <div class="footer-copyright text-center text-muted small mt-4 pt-3 border-top">
+            <div class="fw-bold mb-1" style="font-size: 0.75rem;">&copy; {{ date('Y') }} SIKAM</div>
+            <div style="font-size: 0.7rem; opacity: 0.75;">Sistem Informasi KampusRoom</div>
         </div>
     </div>
 </div>
@@ -183,5 +186,11 @@
             });
         }
     });
+
+    // Helper Isi Otomatis Akun Demo
+    function fillCredentials(id, pass) {
+        document.getElementById('identity_number').value = id;
+        document.getElementById('password').value = pass;
+    }
 </script>
 @endpush

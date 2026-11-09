@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', 'Daftar Akun Peminjam - Portal Akademik'); ?>
+<?php $__env->startSection('title', 'Daftar Akun Peminjam - SIKAM'); ?>
 
 <?php $__env->startSection('content'); ?>
 <div class="split-card row g-0">
@@ -18,12 +18,12 @@
                 <div class="campus-logo-box">
                     <i class="fa-solid fa-building-columns"></i>
                 </div>
-                <h1 class="brand-title">CampusRoom</h1>
+                <h1 class="brand-title">SIKAM</h1>
             </div>
 
             <!-- Subtitle -->
             <div class="brand-subtitle mb-3">
-                SISTEM INFORMASI PEMINJAMAN RUANGAN KAMPUS
+                SISTEM INFORMASI KAMPUSROOM
             </div>
 
             <!-- Deskripsi Singkat -->
@@ -147,7 +147,7 @@
         </div>
 
         <div class="footer-copyright">
-            &copy; <?php echo e(date('Y')); ?> CampusRoom &bull; Sistem Informasi Peminjaman Ruangan Kampus. Hak Cipta Dilindungi.
+            &copy; <?php echo e(date('Y')); ?> SIKAM &bull; Sistem Informasi PKampusRoom. Hak Cipta Dilindungi.
         </div>
     </div>
 </div>
