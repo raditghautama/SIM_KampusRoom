@@ -21,3 +21,10 @@ return Application::configure(basePath: dirname(__DIR__))
             fn (Request $request) => $request->is('api/*') || $request->expectsJson(),
         );
     })->create();
+
+// Konfigurasi storage writable path di /tmp saat running di Vercel serverless
+if (isset($_ENV['VERCEL']) || isset($_SERVER['VERCEL']) || env('VERCEL')) {
+    $app->useStoragePath('/tmp/storage');
+}
+
+return $app;
